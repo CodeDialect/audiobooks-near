@@ -6,9 +6,6 @@
   "repository": "https://github.com/CodeDialect/audiobooks-near",
   "author": "https://github.com/CodeDialect",
   "license": "MIT",
-  "devDependencies": {
-    "near-sdk-as": "^3.2.3"
-  },
   "dependencies": {
     "near-cli": "^4.0.13"
   }
