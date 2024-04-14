@@ -1,7 +1,23 @@
 # Audiobook Marketplace for NEAR Blockchain
 
 ## Description
-This project is an audiobook marketplace built on the NEAR Blockchain.
+This project is an audiobook marketplace built on the NEAR Blockchain. Where users can add their own audiobooks by filling form that contains Title Description Image Link Audio Link and Price. Users can update their profile picture. Other users can Buy and Sell their books. And a Login Management System. 
+
+## Functions
+User must connect their near wallet
+
+Signup or Register:- 
+User cannot proceed without signing up
+
+Signin or Login:-
+User should signup before signing in
+
+Profile:-
+User can add books (audioUrl must be valid), Sell and Edit or cancel the listing.
+User can update their profile picture.
+
+Home:-
+All the collections shown only if it is listed for selling
 
 ## Getting Started
 To get a local copy up and running follow these simple steps.
