@@ -8,8 +8,7 @@ To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
 - Node.js installed
-- yarn package manager
-- this project doesn't support npm because of old dependencies will support later
+- yarn or npm package manager
 
 ### Installation
 1. Clone the repository
