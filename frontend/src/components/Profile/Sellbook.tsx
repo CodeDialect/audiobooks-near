@@ -14,7 +14,6 @@ import {
   Checkbox, // Import Checkbox component from Chakra UI
   useDisclosure,
   useToast,
-  Text,
   Spinner,
 } from "@chakra-ui/react";
 import {

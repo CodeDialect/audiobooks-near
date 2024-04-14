@@ -34,7 +34,7 @@ const Cover = ({ accountName, collection, user }: CoverProps) => {
   let secondaryText = useColorModeValue("gray.400", "gray.400");
   const [showModal, setShowModal] = useState(false);
   const [newImageLink, setNewImageLink] = useState("");
-  const [isValidImage, setIsValidImage] = useState(true);
+  const [_ , setIsValidImage] = useState(true);
   const toast = useToast();
   const handleImageChange = () => {
     if (!newImageLink) {

@@ -1,6 +1,6 @@
 import { AudioBook, listedBooks } from "./model/bookmodel";
 import { User, users } from "./model/usermodel";
-import { ContractPromiseBatch, context, logging, u128 } from "near-sdk-as";
+import { ContractPromiseBatch, context, u128 } from "near-sdk-as";
 
 export function login(): string {
   let registeredUser = getUser(context.sender);
@@ -81,7 +81,6 @@ export function buyAudioBook(audioBookId: string): void {
   }
 
   const audioBook = getAudioBook(audioBookId);
-  logging.log(audioBook);
   if (audioBook == null) {
     throw new Error("book not found");
   }
