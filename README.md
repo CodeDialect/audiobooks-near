@@ -13,7 +13,7 @@ Signin or Login:-
 User should signup before signing in
 
 Profile:-
-User can add books (audioUrl must be valid), Sell and Edit or cancel the listing.
+User can add books (audioUrl must be valid), Sell and Edit or cancel the listing and Delete.
 User can update their profile picture.
 Play your audiobooks
 
