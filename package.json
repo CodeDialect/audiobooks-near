@@ -7,6 +7,11 @@
   "author": "https://github.com/CodeDialect",
   "license": "MIT",
   "dependencies": {
+    "asbuild": "^0.2.0",
+    "assemblyscript": "^0.27.27",
     "near-cli": "^4.0.13"
+  },
+  "devDependencies": {
+    "near-sdk-as": "^3.2.3"
   }
 }
