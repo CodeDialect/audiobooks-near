@@ -1,0 +1,15 @@
+{
+  "name": "audiobooks",
+  "version": "1.0.0",
+  "description": "An Audio Book Market on Near Blockchain",
+  "main": "index.js",
+  "repository": "https://github.com/kerneloverload/audiobooks-near",
+  "author": "https://github.com/kerneloverload",
+  "license": "MIT",
+  "devDependencies": {
+    "near-sdk-as": "^3.2.3"
+  },
+  "dependencies": {
+    "near-cli": "^4.0.13"
+  }
+}
