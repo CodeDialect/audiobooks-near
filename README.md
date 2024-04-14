@@ -29,7 +29,11 @@ To get a local copy up and running follow these simple steps.
       ```bash
       yarn near create-account yourcontract.myaccount.testnet --masterAccount myaccount.testnet --initialBalance 5
       ```
-   1.4 Deploy the contract or [use contract mentioned at step 2.1]
+   1.4 Compile
+      ```bash
+      yarn asb
+      ```
+   1.5 Deploy the contract or [use contract mentioned at step 2.1]
       ```bash
       yarn near deploy yourcontract.myaccount.testnet build/release/audiobooks.wasm
       ```
