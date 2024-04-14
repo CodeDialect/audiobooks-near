@@ -53,7 +53,13 @@ const Addbook = () => {
       setLoading(true);
       e.preventDefault();
       if (parseFloat(formData.price) <= 0) {
-        alert("Price must be greater than 0");
+        toast({
+          title: "Error",
+          description: "Price must be greater than 0",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
         return;
       }
       if (
@@ -63,7 +69,14 @@ const Addbook = () => {
         formData.audio === "" ||
         formData.price === ""
       ) {
-        alert("Please fill in all required fields");
+        toast({
+          title: "Error",
+          description: "Please fill in all fields",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+        setLoading(false);
         return;
       }
 

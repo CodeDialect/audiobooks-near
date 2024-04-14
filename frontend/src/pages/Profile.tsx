@@ -1,4 +1,4 @@
-import { Box, Divider, Flex, Spinner, useToast } from "@chakra-ui/react";
+import { Box, Divider, Flex, Spinner, useToast, Text } from "@chakra-ui/react";
 import CardComponent from "../components/Profile/Card";
 import Cover from "../components/Profile/Cover";
 import { SellBook } from "../components/Profile/Sellbook";
@@ -182,7 +182,11 @@ function Profile({ accountName, loading, audioBooks, user }: ProfileProps) {
                 />
               ))
           ) : (
-            <p>No audio books available</p>
+            <Box textAlign="center" width="100%" p={4}>
+            <Text style={{ fontSize: "xl", color: "gray.500" }}>
+              No Audio Books Available
+            </Text>
+          </Box>
           )}
         </Flex>
       </Flex>

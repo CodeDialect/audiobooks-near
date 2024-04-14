@@ -56,6 +56,8 @@ export function SellBook({ audioBookId, status, buttonWidth }: sellBookProps) {
           duration: 3000,
           isClosable: true,
         });
+        setLoading(false);
+        return;
       } else {
         if (status) {
           await listAudioBook(audioBookId, price);
@@ -98,13 +100,14 @@ export function SellBook({ audioBookId, status, buttonWidth }: sellBookProps) {
         duration: 3000,
         isClosable: true,
       });
-    } finally {
+      setLoading(false);
+      return;
+    }
       setLoading(false);
       onClose();
       setTimeout(() => {
         setReload(true);
       }, 1000);
-    }
   };
 
     return (
@@ -119,7 +122,7 @@ export function SellBook({ audioBookId, status, buttonWidth }: sellBookProps) {
           w={buttonWidth}
           h="32px"
           isLoading={loading}
-          loadingText={loading ? "Selling" : "Updating"}
+          loadingText={status ? "Selling" : "Updating"}
         >
           {status ? "Sell" : "Update"}
         </Button>
@@ -157,7 +160,7 @@ export function SellBook({ audioBookId, status, buttonWidth }: sellBookProps) {
             <ModalFooter>
               <Button
                 isLoading={loading}
-                loadingText={loading ? "Selling" : "Updating"}
+                loadingText={status ? "Selling" : "Updating"}
                 onClick={(e: { preventDefault: () => void }) => {
                   handleSubmit(e);
                 }}
