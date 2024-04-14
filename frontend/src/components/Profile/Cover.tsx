@@ -34,7 +34,6 @@ const Cover = ({ accountName, collection, user }: CoverProps) => {
   let secondaryText = useColorModeValue("gray.400", "gray.400");
   const [showModal, setShowModal] = useState(false);
   const [newImageLink, setNewImageLink] = useState("");
-  const [_ , setIsValidImage] = useState(true);
   const toast = useToast();
   const handleImageChange = () => {
     if (!newImageLink) {
@@ -51,7 +50,6 @@ const Cover = ({ accountName, collection, user }: CoverProps) => {
     const img = document.createElement("img");
     img.src = newImageLink;
     img.onload = async () => {
-      setIsValidImage(true);
       await changeProfilePic(newImageLink);
       toast({
         title: "success",
@@ -66,7 +64,6 @@ const Cover = ({ accountName, collection, user }: CoverProps) => {
       setShowModal(false);
     };
     img.onerror = () => {
-      setIsValidImage(false);
       toast({
         title: "Error",
         description: "Invalid image link",

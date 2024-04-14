@@ -13,8 +13,7 @@ import {
   Input,
   Checkbox, // Import Checkbox component from Chakra UI
   useDisclosure,
-  useToast,
-  Spinner,
+  useToast
 } from "@chakra-ui/react";
 import {
   cancelListing,
@@ -90,7 +89,6 @@ export function SellBook({ audioBookId, status, buttonWidth }: sellBookProps) {
             isClosable: true,
           });
         }
-        onClose();
       }
     } catch (error) {
       toast({
@@ -102,15 +100,13 @@ export function SellBook({ audioBookId, status, buttonWidth }: sellBookProps) {
       });
     } finally {
       setLoading(false);
+      onClose();
       setTimeout(() => {
         setReload(true);
       }, 1000);
     }
   };
 
-  if (loading) {
-    return <Spinner />;
-  } else {
     return (
       <div key={key}>
         <Button
@@ -133,6 +129,7 @@ export function SellBook({ audioBookId, status, buttonWidth }: sellBookProps) {
           isOpen={isOpen}
           onClose={onClose}
         >
+          {loading && <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0, 0, 0, 0.5)', zIndex: 9999 }}></div>}
           <ModalOverlay />
           <ModalContent>
             <ModalHeader>Sell your Book</ModalHeader>
@@ -159,9 +156,10 @@ export function SellBook({ audioBookId, status, buttonWidth }: sellBookProps) {
 
             <ModalFooter>
               <Button
+                isLoading={loading}
+                loadingText={loading ? "Selling" : "Updating"}
                 onClick={(e: { preventDefault: () => void }) => {
                   handleSubmit(e);
-                  onClose();
                 }}
                 colorScheme="blue"
                 mr={3}
@@ -174,5 +172,4 @@ export function SellBook({ audioBookId, status, buttonWidth }: sellBookProps) {
         </Modal>
       </div>
     );
-  }
 }

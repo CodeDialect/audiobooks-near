@@ -1,11 +1,11 @@
-import { Divider, Flex, Spinner, useToast } from "@chakra-ui/react";
+import { Box, Divider, Flex, Spinner, useToast } from "@chakra-ui/react";
 import CardComponent from "../components/Profile/Card";
 import Cover from "../components/Profile/Cover";
 import { SellBook } from "../components/Profile/Sellbook";
 import { utils } from "near-api-js";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
-import { RefObject, useEffect, useRef, useState } from "react";
+import { RefObject, useRef, useState } from "react";
 import { deleteAudioBook } from "../utils/audiobook";
 interface ProfileProps {
   accountName: string;
@@ -22,48 +22,57 @@ function Profile({ accountName, loading, audioBooks, user }: ProfileProps) {
   const [audioPlayerVisible, setAudioPlayerVisible] = useState(false);
   const [audioUrl, setAudioUrl] = useState("");
   const [removingStatus, setRemovingStatus] = useState(false);
-  const [currentPlayingUrl, setCurrentPlayingUrl] = useState("");
   const audioRef: RefObject<AudioPlayer> = useRef(null);
+
   const toast = useToast();
 
-  useEffect(() => {
-    let currentAudioRef = audioRef.current;
-    return () => {
-      if (currentAudioRef && currentAudioRef.audio.current) {
-        const audioElement = currentAudioRef.audio.current;
-        audioElement.pause();
+  let isPlaying = false;
+
+  const handleAudio = (e: React.MouseEvent<HTMLButtonElement, MouseEvent> | undefined, url: string) => {
+    setAudioPlayerVisible(true);
+    if (audioUrl === url) {
+      if (audioRef.current) {
+        if (audioRef.current.audio.current) {
+          if (!isPlaying) {
+            isPlaying = true;
+            audioRef.current.audio.current
+              .play()
+              .then(() => {
+                isPlaying = false;
+              })
+              .catch((error) => {
+                console.error("Error playing audio:", error);
+              });
+            audioRef.current.audio.current.pause();
+            setAudioPlayerVisible(false);
+            console.log("Player is now visible (playing)");
+          } else {
+            audioRef.current.audio.current.pause();
+            isPlaying = false;
+            setAudioPlayerVisible(false);
+            console.log("Player is now invisible (paused)");
+          }
+        }
       }
-    };
-  }, []);
-
-  const handleAudio = (e: React.MouseEvent, url: string) => {
-    if (currentPlayingUrl !== "") {
-      const currentAudio = new Audio(currentPlayingUrl);
-      currentAudio.pause();
-      setCurrentPlayingUrl("");
-      setAudioUrl("");
-    }
-
-    setAudioPlayerVisible(false);
-
-    const audio = new Audio(url);
-    audio.oncanplaythrough = () => {
-      setCurrentPlayingUrl(url);
-      setAudioPlayerVisible(true);
+    } else {
+      if (audioRef.current) {
+        if (audioRef.current.audio.current) {
+          audioRef.current.audio.current.src = url;
+          isPlaying = true;
+          audioRef.current.audio.current
+            .play()
+            .then(() => {
+              isPlaying = false;
+            })
+            .catch((error) => {
+              console.error("Error playing audio:", error);
+            });
+          setAudioPlayerVisible(true);
+          console.log("Player is now visible (new audio)");
+        }
+      }
       setAudioUrl(url);
-    };
-
-    audio.onerror = () => {
-      toast({
-        title: "Error",
-        description: "Failed to load audio file.",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
-    };
-
-    e.preventDefault();
+    }
   };
 
   const handleDelete = async (
@@ -125,50 +134,57 @@ function Profile({ accountName, loading, audioBooks, user }: ProfileProps) {
         }
       />
       <Divider height="10px" />
-      <Flex
-        direction="row"
-        flexWrap="wrap"
-        justifyContent="center"
-        alignItems="center"
-      >
-        {audioBooks.length > 0 ? (
-          audioBooks
-            .filter((book) => book.owner === accountName)
-            .map((book, index) => (
-              <CardComponent
-                key={index}
-                image={book.image}
-                title={book.title}
-                description={book.description}
-                price={
-                  book.sellStatus
-                    ? "Not Listed"
-                    : utils.format.formatNearAmount(book.price)
-                }
-                button1Text={
-                  currentPlayingUrl === book.audio && audioPlayerVisible
-                    ? "Stop"
-                    : "Play"
-                }
-                buttonWidth="100px"
-                deleteAudioBook={(
-                  e: React.MouseEvent<HTMLButtonElement, MouseEvent> | undefined
-                ) => handleDelete(e, book.id)}
-                spinning={removingStatus}
-                deletebutton={true}
-                func={(e) => handleAudio(e, book.audio)}
-                component={
-                  <SellBook
-                    buttonWidth="100px"
-                    audioBookId={book.id}
-                    status={book.sellStatus}
-                  />
-                }
-              />
-            ))
-        ) : (
-          <p>No audio books available</p>
-        )}
+      <Flex direction="column" flexWrap="wrap" justifyContent="flex-start">
+        <Box
+          margin="0px 0px 0px 10px"
+          fontSize="larger"
+          color={"gray.600"}
+          fontWeight="600"
+        >
+          Your Collections
+        </Box>
+        <Flex direction="row" flexWrap="wrap" justifyContent="flex-start">
+          {audioBooks.length > 0 ? (
+            audioBooks
+              .filter((book) => book.owner === accountName)
+              .map((book, index) => (
+                <CardComponent
+                  key={index}
+                  image={book.image}
+                  title={book.title}
+                  description={book.description}
+                  price={
+                    book.sellStatus
+                      ? "Not Listed"
+                      : utils.format.formatNearAmount(book.price)
+                  }
+                  button1Text={
+                    audioUrl === book.audio && audioPlayerVisible
+                      ? "Stop"
+                      : "Play"
+                  }
+                  buttonWidth="100px"
+                  deleteAudioBook={(
+                    e:
+                      | React.MouseEvent<HTMLButtonElement, MouseEvent>
+                      | undefined
+                  ) => handleDelete(e, book.id)}
+                  spinning={removingStatus}
+                  deletebutton={true}
+                  func={(e) => handleAudio(e, book.audio)}
+                  component={
+                    <SellBook
+                      buttonWidth="100px"
+                      audioBookId={book.id}
+                      status={book.sellStatus}
+                    />
+                  }
+                />
+              ))
+          ) : (
+            <p>No audio books available</p>
+          )}
+        </Flex>
       </Flex>
       {audioPlayerVisible && (
         <AudioPlayer autoPlay src={audioUrl} ref={audioRef} />

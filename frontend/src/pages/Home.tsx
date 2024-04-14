@@ -35,7 +35,7 @@ const Home = ({ loading, audioBooks, user }: HomeProps) => {
     description: book.description,
     image: book.image,
   }));
-  
+
   return (
     <>
       <Flex direction="column">
@@ -51,12 +51,12 @@ const Home = ({ loading, audioBooks, user }: HomeProps) => {
       </Flex>
       <Flex
         direction="row"
-        flexWrap="wrap"
         justifyContent="start"
         alignItems="center"
+        flexWrap="wrap"
       >
         {audioBooks
-          .filter((book) => book.owner !== user.id && !book.sellStatus)
+          .filter((book) => !book.sellStatus)
           .map((book, index) => (
             <CardComponent
               key={index}
@@ -65,14 +65,20 @@ const Home = ({ loading, audioBooks, user }: HomeProps) => {
               description={book.description}
               price={utils.format.formatNearAmount(book.price)}
               deletebutton={false}
-              func={() => buyAudioBook(book.id, book.price, book.owner)}
-              button1Text={`Buy for ${utils.format.formatNearAmount(
-                book.price
-              )} NEAR`}
+              func={
+                book.owner === user.id
+                  ? () => undefined
+                  : () => buyAudioBook(book.id, book.price, book.owner)
+              }
+              button1Text={
+                book.owner === user.id
+                  ? `You own this book`
+                  : `Buy for ${utils.format.formatNearAmount(book.price)} NEAR`
+              }
+              buyButtonStatus={book.owner === user.id}
             />
           ))}
-        {audioBooks.filter((book) => book.owner !== user.id && !book.sellStatus)
-          .length === 0 && (
+        {audioBooks.filter((book) => !book.sellStatus).length === 0 && (
           <Box textAlign="center" width="100%" p={4}>
             <Text style={{ fontSize: "xl", color: "gray.500" }}>
               No Audiobooks Listed by Others

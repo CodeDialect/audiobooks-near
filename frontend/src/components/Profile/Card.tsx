@@ -21,12 +21,13 @@ interface CardComponentProps {
   description: string;
   price?: string | null;
   button1Text?: string;
-  func: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  func: (e: React.MouseEvent<HTMLButtonElement> | undefined ) => void;
   deleteAudioBook?: (e: React.MouseEvent<HTMLButtonElement> | undefined) => void;
   component?: React.ReactNode;
   buttonWidth?: string;
   spinning?: boolean;
   deletebutton: boolean;
+  buyButtonStatus?: boolean
 }
 
 const CardComponent = ({
@@ -40,7 +41,8 @@ const CardComponent = ({
   func,
   buttonWidth,
   deleteAudioBook,
-  deletebutton
+  deletebutton,
+  buyButtonStatus
 }: CardComponentProps) => {
   const [showCloseButton, setShowCloseButton] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -145,6 +147,7 @@ const CardComponent = ({
         </Text>
         <Flex mt="2">
           <Button
+            disabled={buyButtonStatus}
             flex="1"
             onClick={(e: React.MouseEvent<HTMLButtonElement>) => func(e)}
             mr="2"
