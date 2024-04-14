@@ -1,5 +1,4 @@
 {
-  "homepage": "https://CodeDialect.github.io/audiobooks-near",
   "name": "audiobooks",
   "version": "1.0.0",
   "description": "An Audio Book Market on Near Blockchain",
@@ -37,11 +36,9 @@
   },
   "scripts": {
     "start": "react-scripts --openssl-legacy-provider start",
-    "build": "react-scripts build",
+    "build": "react-scripts --openssl-legacy-provider build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
