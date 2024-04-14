@@ -9,12 +9,19 @@ To get a local copy up and running follow these simple steps.
 ### Prerequisites
 - Node.js installed
 - yarn package manager
-- this project doesn't support npm because of old dependencies
+- this project doesn't support npm because of old dependencies will support later
 
 ### Installation
 1. Clone the repository
    ```sh
    git clone https://github.com/CodeDialect/audiobooks-near.git
+
+1.1 Install CLI Tools
+   ```bash
+      yarn global add near-cli assemblyscript asbuild
+   ```
+1.2 
+
 2. Navigate to the frontend directory
     ```bash
    cd frontend
