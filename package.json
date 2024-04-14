@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "An Audio Book Market on Near Blockchain",
   "main": "index.js",
-  "repository": "https://github.com/kerneloverload/audiobooks-near",
-  "author": "https://github.com/kerneloverload",
+  "repository": "https://github.com/CodeDialect/audiobooks-near",
+  "author": "https://github.com/CodeDialect",
   "license": "MIT",
   "devDependencies": {
     "near-sdk-as": "^3.2.3"
