@@ -141,6 +141,7 @@ const Addbook = () => {
 
       <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
+        {loading && <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0, 0, 0, 0.5)', zIndex: 9999 }}></div>}
         <ModalContent>
           <ModalHeader>Add an Audio Book</ModalHeader>
           <ModalCloseButton />

@@ -34,8 +34,10 @@ const Cover = ({ accountName, collection, user }: CoverProps) => {
   let secondaryText = useColorModeValue("gray.400", "gray.400");
   const [showModal, setShowModal] = useState(false);
   const [newImageLink, setNewImageLink] = useState("");
+  const [loading, setLoading] = useState(false);
   const toast = useToast();
   const handleImageChange = () => {
+    setLoading(true);
     if (!newImageLink) {
       toast({
         title: "Error",
@@ -58,6 +60,7 @@ const Cover = ({ accountName, collection, user }: CoverProps) => {
         duration: 3000,
         isClosable: true,
       });
+      setLoading(false);
       setTimeout(() => {
         window.location.reload();
       }, 1000);
@@ -93,6 +96,7 @@ const Cover = ({ accountName, collection, user }: CoverProps) => {
         {showModal && (
           <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
             <ModalOverlay />
+            {loading && <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0, 0, 0, 0.5)', zIndex: 9999 }}></div>}
             <ModalContent>
               <ModalHeader>Change Profile Image</ModalHeader>
               <ModalCloseButton />
