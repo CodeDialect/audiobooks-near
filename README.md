@@ -15,6 +15,7 @@ User should signup before signing in
 Profile:-
 User can add books (audioUrl must be valid), Sell and Edit or cancel the listing.
 User can update their profile picture.
+Play your audiobooks
 
 Home:-
 All the collections shown only if it is listed for selling
