@@ -15,17 +15,39 @@ To get a local copy up and running follow these simple steps.
 1. Clone the repository
    ```sh
    git clone https://github.com/CodeDialect/audiobooks-near.git
-
-1.1 Install CLI Tools
-   ```bash
-      yarn global add near-cli assemblyscript asbuild
    ```
-1.2 
-
+   
+   1.1 Install CLI Tools or install it to your system directly
+      ```bash
+      yarn global add near-cli assemblyscript asbuild
+      ```
+   1.2 Login the Near Account
+      ```bash
+      yarn near login
+      ```
+   1.3 Create a subaccount for contract deployment or deploy logged one
+      ```bash
+      yarn near create-account yourcontract.myaccount.testnet --masterAccount myaccount.testnet --initialBalance 5
+      ```
+   1.4 Deploy the contract or [use contract mentioned at step 2.1]
+      ```bash
+      yarn near deploy yourcontract.myaccount.testnet build/release/audiobooks.wasm
+      ```
 2. Navigate to the frontend directory
     ```bash
    cd frontend
      ```
+   2.1 Edit Enviornment Variable [.env.example]
+    
+   rename the .env.example to: 
+   ```bash 
+   .env 
+   ```
+   Update .env [as deployed contract in the step 1 or use my already deployed: contract.audiobook.testnet]
+   ```bash 
+   REACT_APP_CONTRACT_ADDRESS= contract.myaccount.testnet 
+   REACT_APP_ENV= testnet
+   ```
 
 # Getting Started with Create React App
 
