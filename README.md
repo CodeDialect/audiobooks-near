@@ -18,7 +18,7 @@ User can update their profile picture.
 Play your audiobooks
 
 Home:-
-All the collections shown only if it is listed for selling
+All the collections shown only if it is listed for selling and owner cannot buy their own listed audiobook
 
 ## Getting Started
 To get a local copy up and running follow these simple steps.
