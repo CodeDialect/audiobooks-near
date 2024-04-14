@@ -1,5 +1,4 @@
-const CONTRACT_NAME = process.env.REACT_APP_CONTRACT_ADDRESS || "${CONTRACT_NAME}"; // line 1
-console.log(CONTRACT_NAME);
+const CONTRACT_NAME = process.env.REACT_APP_CONTRACT_ADDRESS || "${CONTRACT_NAME}";
 function environment(env:string) {
   switch (env) {
     case "mainnet": // line 5

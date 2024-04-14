@@ -59,7 +59,6 @@ const Navbar = ({ user }: { user: User }) => {
   };
 
   let refresh = localStorage.getItem("refresh");
-  console.log(refresh);
   useEffect(() => {
     if (refresh === "true") {
       localStorage.setItem("refresh", "false");

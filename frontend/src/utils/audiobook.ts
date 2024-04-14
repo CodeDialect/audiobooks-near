@@ -13,7 +13,6 @@ interface AudioBook {
 const GAS = 100000000000000;
 
 export async function createAudioBook(audioBook: AudioBook) {
-  console.log(audioBook)
   if (audioBook.price === null) {
     throw Error("Invalid price");
   }
@@ -28,7 +27,6 @@ export async function listAudioBook(audioBookId: string, price: string) {
   }
   price = parseNearAmount(price + "") as string;
   const response = await window.contract.listAudioBook({ audioBookId: audioBookId, price });
-  console.log(response);
   return response;
 }
 
@@ -38,7 +36,6 @@ export async function editListing(audioBookId: string, price: string) {
   }
   price = parseNearAmount(price + "") as string;
   const response = await window.contract.editListing({ audioBookId: audioBookId, price });
-  console.log(response);
   return response;
 }
 
@@ -58,21 +55,17 @@ export async function deleteAudioBook(id: string) {
 }
 
 export async function buyAudioBook(audioBookId: string, price: string, owner: string) {
-  console.log(`id: ${audioBookId}, price: ${price}, owner: ${owner}`);  
-  const response = await window.contract.buyAudioBook({ audioBookId: audioBookId }, GAS, price); // buy_product for the Rust contract
-  console.log(response);
+  const response = await window.contract.buyAudioBook({ audioBookId: audioBookId }, GAS, price);
   return response;
 }
 
 export async function login() {
   const response = await window.contract.login();
-  console.log(response);
   return response;
 }
 
 export async function register() {
   const response = await window.contract.register();
-  console.log(response);
   return response;
 }
 
