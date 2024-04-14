@@ -12,7 +12,7 @@ declare global {
 }
 
 export async function initializeContract() {
-  const nearEnv = environment("testnet");
+  const nearEnv = environment(process.env.REACT_APP_ENV || "");
   const near = await connect(
     Object.assign(
       { keyStore: new keyStores.BrowserLocalStorageKeyStore() },
@@ -58,7 +58,7 @@ export async function getAccountId() {
 
 export async function login() {
   await window.walletConnection.requestSignIn({
-    contractId: "samplecontract.arim.testnet",
+    contractId: environment(process.env.REACT_APP_ENV || "").contractName,
   });
 }
 

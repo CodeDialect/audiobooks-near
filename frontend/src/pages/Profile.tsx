@@ -155,6 +155,7 @@ function Profile({ accountName, loading, audioBooks, user }: ProfileProps) {
                   e: React.MouseEvent<HTMLButtonElement, MouseEvent> | undefined
                 ) => handleDelete(e, book.id)}
                 spinning={removingStatus}
+                deletebutton={true}
                 func={(e) => handleAudio(e, book.audio)}
                 component={
                   <SellBook

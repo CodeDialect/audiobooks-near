@@ -26,6 +26,7 @@ interface CardComponentProps {
   component?: React.ReactNode;
   buttonWidth?: string;
   spinning?: boolean;
+  deletebutton: boolean;
 }
 
 const CardComponent = ({
@@ -39,6 +40,7 @@ const CardComponent = ({
   func,
   buttonWidth,
   deleteAudioBook,
+  deletebutton
 }: CardComponentProps) => {
   const [showCloseButton, setShowCloseButton] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -78,7 +80,7 @@ const CardComponent = ({
         borderTopRadius="lg"
       />
 
-      {showCloseButton && (
+      {showCloseButton && deletebutton && (
         <>
         <Box
           position="absolute"
