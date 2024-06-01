@@ -63,6 +63,7 @@ To get a local copy up and running follow these simple steps.
    ```bash 
    .env 
    ```
+   
    Update .env [as deployed contract in the step 1 or use my already deployed: contract.audiobooks.testnet]
    ```bash 
    REACT_APP_CONTRACT_ADDRESS= contract.myaccount.testnet 
